@@ -57,7 +57,7 @@ public class ListingDetailScraperTest {
                             return currentURL; 
 			}
 
-			@Override
+			@Override 
 			public boolean hasNext() {
                             Link nextLink =(Link)foundLinks.get(foundLinksItertator.nextIndex());                            
                             log.debug("next page to iterate = {}", nextLink.getHref());

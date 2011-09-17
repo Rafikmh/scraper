@@ -11,7 +11,7 @@ public enum HtmlSample {
 	 * This is a listing of Grants where each one appears in a line in the table
 	 * with a link to a detail page that could be scraped to get the details.
 	 */
-	PagedListingTable("/testpages/PagedListingTable.html"),
+            PagedListingTable("/testpages/PagedListingTable.html"), 
 
 	/**
 	 * Goes with the listing above, shows the details on a given Grant, has a
@@ -46,12 +46,7 @@ public enum HtmlSample {
 	 * Sometimes a label with multiple values is done as one or more follow on
 	 * rows that have no label.
 	 */
-	TableWithULs("/testpages/table-with-uls.html"),
-	
-	/**
-	 * It's legal to have alternating TRs with THs on one row and TDs in the other.  
-	 */
-	TableWithAlternatingRowsOfHeaders("/testpages/table-with-alternating-rows-of-headers.html");
+	TableWithULs("/testpages/table-with-uls.html");
 
 	private String path;
 
