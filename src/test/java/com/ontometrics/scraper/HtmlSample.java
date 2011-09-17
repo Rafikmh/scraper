@@ -11,7 +11,7 @@ public enum HtmlSample {
 	 * This is a listing of Grants where each one appears in a line in the table
 	 * with a link to a detail page that could be scraped to get the details.
 	 */
-	PagedListingTable("/testpages/grants-gov-table.html"),
+	PagedListingTable("/testpages/PagedListingTable.html"),
 
 	/**
 	 * Goes with the listing above, shows the details on a given Grant, has a
