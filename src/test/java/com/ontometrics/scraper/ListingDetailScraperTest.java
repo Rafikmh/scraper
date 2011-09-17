@@ -64,6 +64,12 @@ public class ListingDetailScraperTest {
 
                             return foundLinksItertator.hasNext();
 			}
+
+			@Override
+			public URL getBaseUrl() {
+				// TODO Auto-generated method stub
+				return null;
+			}
 		};
                 HtmlExtractor htmlExtractor = html().url(PagedListingTable.getUrl()).table().matching(listingTableKeyword);
 		

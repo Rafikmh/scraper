@@ -98,7 +98,7 @@ public class DefaultFieldExtractor extends BaseExtractor implements FieldExtract
 	private List<Field> extractFieldsFromTables() {
 		List<Field> extractedFields = new ArrayList<Field>();
 		List<Element> tables = getSource().getAllElements(HTMLElementName.TABLE);
-		log.debug("found {} tables to try and find fields in {}", tables.size(), getSource().toString());
+		//log.debug("found {} tables to try and find fields in {}", tables.size(), getSource().toString());
 
 		for (Element table : tables) {
 			extractedFields.addAll(extractFieldsFromTable(table.toString()));
@@ -143,19 +143,20 @@ public class DefaultFieldExtractor extends BaseExtractor implements FieldExtract
 			}
 		} else {
 			List<String> headers = new ArrayList<String>();
-			List<Element> headerElements = source.getAllElements(HTMLElementName.TH);
-			for (Element headerElement : headerElements) {
-				String header = headerElement.getTextExtractor().toString();
-				headers.add(header);
-				log.debug("header text: {}", header);
-			}
 			List<Element> rows = source.getAllElements(HTMLElementName.TR);
 			for (Element row : rows) {
+				List<Element> headerElements = row.getAllElements(HTMLElementName.TH);
+				if (headerElements.size()>0){
+					headers.clear();
+				}
+				for (Element headerElement : headerElements) {
+					String header = headerElement.getTextExtractor().toString();
+					headers.add(header);
+					log.debug("header text: {}", header);
+				}
 				List<Element> cells = row.getAllElements(HTMLElementName.TD);
-				if (headers.size() == 0) {
-					for (int i = 0; i < cells.size(); i++) {
-						headers.add("Col" + i);
-					}
+				for (int n = headers.size(); n < cells.size(); n++){
+					headers.add("col" + n);
 				}
 				int index = 0;
 				for (Element cell : cells) {
@@ -190,7 +191,6 @@ public class DefaultFieldExtractor extends BaseExtractor implements FieldExtract
 		Source source = new Source(html);
 		source.fullSequentialParse();
 		List<Element> lis = source.getAllElements(HTMLElementName.LI);
-		log.debug("All Lis = {}", lis);
 		for (Element li : lis) {
 			log.debug("looking at li: {} w/text: {}", li, li.getTextExtractor().toString());
 			String[] parts = li.getTextExtractor().toString().split(":");
